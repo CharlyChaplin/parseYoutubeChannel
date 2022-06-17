@@ -1,0 +1,20 @@
+﻿let root = document.querySelector('.style-scope ytd-grid-renderer');
+
+let m = root.getElementsByTagName('ytd-grid-playlist-renderer');
+
+let rootArr = [];
+
+for (item of m) {
+    let title = item.querySelector('h3 > a').getAttribute("title");
+    let link = 'https://www.youtube.com' + item.querySelector('h3 > a').getAttribute("href");
+    let count = item.querySelector('.style-scope ytd-thumbnail-overlay-side-panel-renderer').innerText;
+    count = count.includes('тыс.')
+        ? parseFloat(count.replace(',', '.')) * 1000
+        : count;
+
+    rootArr.push({title, link, count});
+}
+
+rootArr.forEach(item => {
+    console.log(item.link, '\t', item.count, '\t', item.title);
+})
